@@ -10,9 +10,8 @@ import com.mns.banzosapp.app_utils.URLHelper
 import com.mns.banzosapp.helper.base.AppBaseActivity
 import com.mns.banzosapp.helper.base.CallBackForRetry
 import com.mns.banzosapp.helper.http.FetchItem
-import com.mns.banzosapp.helper.http.FetchList
 import com.mns.banzosapp.model.IslandDetails
-import com.mns.banzosapp.model.IslandListResponse
+import com.mns.banzosapp.model.IslandResponse
 
 class HomeActivity : AppBaseActivity() {
 
@@ -58,13 +57,14 @@ class HomeActivity : AppBaseActivity() {
 
     private fun processToLoadIslandList() {
         showProgressDialog()
-        val param = getParam()
-        FetchItem(object : FetchItem.ListCommunicatorInterface<IslandListResponse> {
+        val param = getLoginParam()
+
+        FetchItem(object : FetchItem.ListCommunicatorInterface<IslandResponse> {
             override fun onError(error: VolleyError) {
                 showErrorMessage(error)
             }
 
-            override fun onSuccess(fetchedDetails: IslandListResponse) {
+            override fun onSuccess(fetchedDetails: IslandResponse) {
                 dismissProgressDialog()
                 URLHelper.ISLAND_IMAGE_URL = fetchedDetails.image_base_url.toString()
                 islandList.addAll(fetchedDetails.islands)
@@ -77,7 +77,7 @@ class HomeActivity : AppBaseActivity() {
             }
         }).fetchItem(
             URLHelper.FETCH_ISLAND_LIST,
-            IslandListResponse::class.java,
+            IslandResponse::class.java,
             param,
             localClassName
         )

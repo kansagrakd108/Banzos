@@ -8,7 +8,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.mns.banzosapp.R
 
-class ChicWikProgressBar(context: Context) : Dialog(context) {
+class BanzosProgressBar(context: Context) : Dialog(context) {
     init {
         setContentView(R.layout.progress_bar_design)
         setCancelable(false)

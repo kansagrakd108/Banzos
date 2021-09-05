@@ -17,7 +17,7 @@ object URLHelper {
 
 
     //List APIs
-    var FETCH_ISLAND_LIST = HostMainAddress + "list_island"
+    val FETCH_ISLAND_LIST = HostMainAddress + "list_island"
 
 
     //Add APIs
